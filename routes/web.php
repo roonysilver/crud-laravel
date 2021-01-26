@@ -30,11 +30,11 @@ Route::resource('my', 'MyController');
 
 // Route::controller('test', 'ImplicitController');
 
-class MyClass {
-    public $foo = 'bar';
-}
+// class MyClass {
+//     public $foo = 'bar';
+// }
 
-Route::get('/myclass', 'ImplicitController@index');
+// Route::get('/myclass', 'ImplicitController@index');
 
 Route::get('foo/bar', 'UriController@index');
 
@@ -80,8 +80,19 @@ Route::resource('employee', 'Employee');
 
 Route::get('insert', "StudInsertController@insertForm");
 Route::post('create', "StudInsertController@insert");
+Route::post('create', "StudInsertController@valid");
 
 Route::get('view', 'StudInsertController@index');
 Route::get('edit/{id}', 'StudInsertController@show');
 Route::post('edit/{id}','StudInsertController@update');
 Route::get('delete/{id}', 'StudInsertController@delete');
+
+Route::get('sentemail', 'StudInsertController@basic_email');
+
+Route::get('home', 'base@index');
+
+Route::resource('cars', 'CarController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

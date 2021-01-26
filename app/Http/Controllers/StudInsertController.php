@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+
 class StudInsertController extends Controller
 {
     public function insertForm() {
@@ -39,4 +42,21 @@ class StudInsertController extends Controller
         echo "Record deleted";
         echo '<a href = "/view">Click Here</a> to go back.';
     }
+
+    public function valid(Request $request) {
+        $request->validate([
+            'name' => 'required|min:6'
+        ]);
+    }
+
+    public function basic_email() {
+        $input = $request->all();
+        $data = array('name'=>$input['name'], 'email'=>$input['email']);
+     
+        Mail::send('email', $data, function($message) {
+           $message->to('lq_don@brycen.com.vn', 'Le Quy Don')->subject('Laravel Basic Testing Mail');
+           $message->from('tc_son@brycen.com.vn','Tran Cong Son');
+        });
+        echo "Basic Email Sent. Check your inbox.";
+     }
 }

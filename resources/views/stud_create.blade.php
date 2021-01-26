@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+@section('content')
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,11 +10,20 @@
 </head>
 <body>
     <form action="/create" method="POST">
+        @if (count($errors) > 0)
+        <div class = "alert alert-danger">
+           <ul>
+              @foreach ($errors->all() as $error)
+                 <li>{{ $error }}</li>
+              @endforeach
+           </ul>
+        </div>
+     @endif
         @csrf
         <table>
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="stud_name"></td>
+                <td><input type="text" name="name"></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -23,4 +34,5 @@
     </form>
     <a href="/view">Back</a>
 </body>
-</html>
+</html>  
+@endsection
